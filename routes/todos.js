@@ -30,7 +30,7 @@ router.post('/create', async (req, res) => {
 
 router.post('/complete', async (req,res) => {
     const { id, completed } = req.body;
-    const isCompleted = completed === '1';
+    const isCompleted = !!completed;
     await Todo.updateTodoStatus(id, isCompleted);
 
     res.redirect('/')
