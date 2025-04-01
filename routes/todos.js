@@ -24,8 +24,8 @@ router.get('/create', (req,res) =>{
 
 router.post('/create', async (req, res) => {
     const { content } = req.body;
-    await Todo.createTodo(content);
-    res.redirect('/');
+    const id = await Todo.createTodo(content);
+    res.json({ id, content });
   });
 
 router.post('/complete', async (req,res) => {
@@ -33,7 +33,8 @@ router.post('/complete', async (req,res) => {
     const isCompleted = !!completed;
     await Todo.updateTodoStatus(id, isCompleted);
 
-    res.redirect('/')
+    res.json({ success: true });
+
 })
 
 module.exports = router
